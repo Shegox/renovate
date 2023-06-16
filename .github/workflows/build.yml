@@ -349,7 +349,7 @@ jobs:
           files: '${{ needs.setup.outputs.test-coverage-files }}'
       - run: npm install -g istanbul
       
-      - run: istanbul report --include ./coverage-reports/*.json text > ./coverage.txt
+      - run: istanbul report --include "./coverage-reports/*.json" text > ./coverage.txt
       - uses: fingerprintjs/action-coverage-report-md@v1
         id: coverage
         with:

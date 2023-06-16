@@ -347,9 +347,14 @@ jobs:
         uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3.1.4
         with:
           files: '${{ needs.setup.outputs.test-coverage-files }}'
-
+      - run: npm install -g istanbul
+      
+      - run: istanbul report --include ./coverage-reports/*.json text > ./coverage.txt
       - uses: fingerprintjs/action-coverage-report-md@v1
         id: coverage
+        with:
+          textReportPath: ./coverage.txt
+          srcBasePath: ./lib
     
       - run: "echo ${{ steps.coverage.outputs.markdownReport }} >> $GITHUB_STEP_SUMMARY"
 

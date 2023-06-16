@@ -356,7 +356,10 @@ jobs:
           textReportPath: ./coverage.txt
           srcBasePath: ./lib
     
-      - run: "echo ${{ steps.coverage.outputs.markdownReport }} >> $GITHUB_STEP_SUMMARY"
+      - run: |
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          ${{ steps.coverage.outputs.markdownReport }}
+          EOF
 
   # This allows not to specify particular jobs in matrix as required
   test-success:

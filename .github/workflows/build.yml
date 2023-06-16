@@ -348,6 +348,11 @@ jobs:
         with:
           files: '${{ needs.setup.outputs.test-coverage-files }}'
 
+      - uses: fingerprintjs/action-coverage-report-md@v1
+        id: coverage
+    
+      - run: "echo ${{ steps.coverage.outputs.markdownReport }} >> $GITHUB_STEP_SUMMARY"
+
   # This allows not to specify particular jobs in matrix as required
   test-success:
     needs: [setup, test]

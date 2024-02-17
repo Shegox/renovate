@@ -1,0 +1,9 @@
+#!/bin/sh
+# get current full path of this script
+basedir=$(dirname "$(echo "$0" | sed -e 's,\\,/,g')")
+# remove this directory from PATH
+export PATH=$(echo $PATH | sed -e "s,$basedir,,g")
+# remove ./.bin from PATH
+export PATH=$(echo $PATH | sed -e "s,./.bin,,g")
+
+exec node --security-revert=CVE-2023-46809 "$@"

@@ -1,0 +1,18 @@
+general:
+  buildTool: "gradle"
+  productiveBranch: "main"
+stages:
+  Build:
+    cnbBuild: true
+    helmExecute: true
+steps:
+  maven:
+    dockerImage: maven:3.9.6
+  gradleExecuteBuild:
+    dockerImage: gradle:8-jdk17-alpine
+  detectExecuteScan:
+    dockerImage: "openjdk:11"
+  cnbBuild:
+    path: build/libs/demo-?.?.?.jar
+    dockerImage: 'docker.io/paketobuildpacks/build-noble-base:0.0.2'
+    runImage: index.docker.io/paketobuildpacks/run-noble-base:0.0.2

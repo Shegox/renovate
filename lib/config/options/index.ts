@@ -1144,6 +1144,7 @@ const options: RenovateOptions[] = [
       'helm-requirements',
       'helmfile',
       'helmv3',
+      'piper-config',
       'kubernetes',
       'kustomize',
       'terraform',

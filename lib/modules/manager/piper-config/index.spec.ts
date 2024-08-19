@@ -1,6 +1,6 @@
 import { Fixtures } from '../../../../test/fixtures';
 import { partial } from '../../../../test/util';
-import { extractPackageFile } from '../helm-values/extract';
+import { extractPackageFile } from '../index';
 import type { ExtractConfig } from '../types';
 
 const piperConfigSimple = Fixtures.get('simple.yaml');
@@ -12,17 +12,32 @@ const packageFile = 'config.yaml';
 describe('modules/manager/piper-config/index', () => {
   describe('extractPackageFile()', () => {
     it('returns null for invalid yaml file content', () => {
-      const result = extractPackageFile('nothing here: [', packageFile, config);
+      const result = extractPackageFile(
+        'piper-config',
+        'nothing here: [',
+        packageFile,
+        config,
+      );
       expect(result).toBeNull();
     });
 
     it('returns null for empty yaml file content', () => {
-      const result = extractPackageFile('', packageFile, config);
+      const result = extractPackageFile(
+        'piper-config',
+        '',
+        packageFile,
+        config,
+      );
       expect(result).toBeNull();
     });
 
     it('extracts from config.yaml correctly', () => {
-      const result = extractPackageFile(piperConfigSimple, packageFile, config);
+      const result = extractPackageFile(
+        'piper-config',
+        piperConfigSimple,
+        packageFile,
+        config,
+      );
       expect(result).toMatchObject({
         deps: [
           {
